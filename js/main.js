@@ -1,10 +1,11 @@
-let money;
-let income;
-let addExpenses;
-let deposit;
-let mission;
-let period;
+let num = 266219;
+let numStr = String(num);
+let multiplier = numStr[0];
 
-alert('Hello, world!');
+for(var i = 1; i < numStr.length; i++){
+    console.log(multiplier *= +numStr[i]);
+}
 
-console.log('Привет, мир!');
+multiplier = String(multiplier ** 3);
+console.log('Число: ', multiplier.substring(0, 2));
+
