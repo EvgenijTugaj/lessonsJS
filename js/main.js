@@ -5,7 +5,9 @@ let deposit = true;
 let mission = 1000000;
 let period = 12;
 
-console.log('money: ', money);
+console.log('money: ', typeof money);
+console.log('income: ', typeof income);
+console.log('deposit: ', typeof deposit);
 
 console.log('addExpensesLength: ', addExpenses.length);
 
