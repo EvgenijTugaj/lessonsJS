@@ -7,4 +7,4 @@ let period;
 
 alert('Hello, world!');
 
-console.log('Привет, мир!');
+console.log('lesson01');
