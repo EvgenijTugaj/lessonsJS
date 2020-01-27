@@ -1,3 +1,5 @@
+'use strict';
+
 let money, income, addExpenses, deposit, mission, period;
 
 money = 90000;
@@ -8,9 +10,7 @@ mission = 1000000;
 period = 12;
 
 console.log('money: ' + typeof money + ', income: ' + typeof income + ', deposit: ' + typeof deposit);
-
 console.log('addExpensesLength: ', addExpenses.length);
-
 console.log(`"Период равен ${period} месяцев" и "Цель заработать ${mission} рублей/долларов/гривен/юани"`);
 
 addExpenses = addExpenses.toLowerCase();
@@ -18,5 +18,3 @@ console.log('addExpenses: ', addExpenses.split(', '));
 
 let budgetDay = money / 30;
 console.log('budgetDay: ', budgetDay);
-
-
