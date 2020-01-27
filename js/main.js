@@ -7,10 +7,7 @@ deposit = true;
 mission = 1000000;
 period = 12;
 
-
-console.log('money: ', typeof money);
-console.log('income: ', typeof income);
-console.log('deposit: ', typeof deposit);
+console.log('money: ' + typeof money + ', income: ' + typeof income + ', deposit: ' + typeof deposit);
 
 console.log('addExpensesLength: ', addExpenses.length);
 
@@ -22,5 +19,4 @@ console.log('addExpenses: ', addExpenses.split(', '));
 let budgetDay = money / 30;
 console.log('budgetDay: ', budgetDay);
 
-console.log('Привет, мир!');
 
