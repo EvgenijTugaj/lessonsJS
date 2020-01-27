@@ -28,7 +28,7 @@ let expenses2 = prompt('Введите обязательную статью р�
 let amount2 = parseInt(prompt('Во сколько это обойдется?', '20000руб.'));
 
 let budgetMonth = money - amount1 - amount2;
-budgetDay = Math.floor(budgetDay = budgetMonth / 30);
+budgetDay = Math.floor(budgetMonth / 30);
 
 console.log('Ваш месячный доход: ', money);
 console.log('Бюджет за месяц:', budgetMonth);
