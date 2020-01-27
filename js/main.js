@@ -1,15 +1,15 @@
 'use strict';
 
-let money, income, addExpenses, deposit, mission, period;
+let money = 90000,
+    income = 'Заработок по знакомым',
+    addExpenses = 'комуналка, интернет, бензин, еда',
+    deposit = true,
+    mission = 1000000,
+    period = 12;
 
-money = 90000;
-income = 'Заработок по знакомым';
-addExpenses = 'комуналка, интернет, бензин, еда';
-deposit = true;
-mission = 1000000;
-period = 12;
-
-console.log('money: ' + typeof money + ', income: ' + typeof income + ', deposit: ' + typeof deposit);
+console.log('money: ' + typeof money);
+console.log('income: ' + typeof income);
+console.log('deposit: ' + typeof deposit);
 console.log('addExpensesLength: ', addExpenses.length);
 console.log(`"Период равен ${period} месяцев" и "Цель заработать ${mission} рублей/долларов/гривен/юани"`);
 
@@ -17,20 +17,24 @@ addExpenses = addExpenses.toLowerCase();
 console.log('addExpenses: ', addExpenses.split(', '));
 
 let budgetDay = money / 30;
-console.log('budgetDay: ', budgetDay);
 
-money = parseInt(prompt('Ваш месячный доход?'));
-addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую');
+money = parseInt(prompt('Ваш месячный доход?', '200000руб.'));
+
+addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую', 
+'комуналка, еда, бензин, казино');
 deposit = confirm('Есть ли у вас депозит в банке?');
-let expenses1 = prompt('Введите обязательную статью расходов?');
-let amount1 = parseInt(prompt('Во сколько это обойдется?'));
-let expenses2 = prompt('Введите обязательную статью расходов?');
-let amount2 = parseInt(prompt('Во сколько это обойдется?'));
+let expenses1 = prompt('Введите обязательную статью расходов?', 'Покупка велосипеда.');
+let amount1 = parseInt(prompt('Во сколько это обойдется?', '10000руб.'));
+let expenses2 = prompt('Введите обязательную статью расходов?', 'Поход к хирургу после велосипеда.');
+let amount2 = parseInt(prompt('Во сколько это обойдется?', '20000руб.'));
 
 let budgetMonth = money - amount1 - amount2;
+budgetDay = Math.floor(budgetDay = budgetMonth / 30);
+
+console.log('Ваш месячный доход: ', money);
 console.log('Бюджет за месяц:', budgetMonth);
 console.log('Цель будет достигнута за:', Math.ceil(mission / budgetMonth), 'месяцев');
-console.log('Бюджет на день:', budgetDay = Math.floor(budgetDay = budgetMonth / 30));
+console.log('Бюджет на день:', budgetDay);
  
 switch(true){
     case budgetDay >= 1200 :
