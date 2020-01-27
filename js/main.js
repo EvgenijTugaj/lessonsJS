@@ -1,9 +1,11 @@
-let money = 90000;
-let income = 'Заработок по знакомым';
-let addExpenses = 'комуналка, интернет, бензин, еда';
-let deposit = true;
-let mission = 1000000;
-let period = 12;
+let money, income, addExpenses, deposit, mission, period;
+
+money = 90000;
+income = 'Заработок по знакомым';
+addExpenses = 'комуналка, интернет, бензин, еда';
+deposit = true;
+mission = 1000000;
+period = 12;
 
 console.log('money: ', typeof money);
 console.log('income: ', typeof income);
