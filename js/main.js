@@ -1,8 +1,8 @@
 'use strict';
 
-let money = 90000,
+let money,
     income = 'Заработок по знакомым',
-    addExpenses = 'комуналка, интернет, бензин, еда',
+    addExpenses,
     deposit = true,
     mission = 1000000,
     period = 12,
