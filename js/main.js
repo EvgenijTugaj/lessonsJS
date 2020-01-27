@@ -5,7 +5,8 @@ let money = 90000,
     addExpenses = 'комуналка, интернет, бензин, еда',
     deposit = true,
     mission = 1000000,
-    period = 12;
+    period = 12,
+    budgetDay;
 
 console.log('money: ' + typeof money);
 console.log('income: ' + typeof income);
@@ -15,8 +16,6 @@ console.log(`"Период равен ${period} месяцев" и "Цель з�
 
 addExpenses = addExpenses.toLowerCase();
 console.log('addExpenses: ', addExpenses.split(', '));
-
-let budgetDay = money / 30;
 
 money = parseInt(prompt('Ваш месячный доход?', '200000руб.'));
 
