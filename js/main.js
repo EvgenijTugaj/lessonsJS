@@ -1,34 +1,25 @@
 'use strict';
 
-let money,
+let money = parseInt(prompt('Ваш месячный доход?', '200000руб.')),
+    addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую', 
+    'комуналка, еда, бензин, казино'),
+    deposit = confirm('Есть ли у вас депозит в банке?'),
     income = 'Заработок по знакомым',
-    addExpenses,
-    deposit = true,
     mission = 1000000,
-    period = 12,
-    budgetDay;
+    period = 12;
 
-console.log('money: ' + typeof money);
-console.log('income: ' + typeof income);
-console.log('deposit: ' + typeof deposit);
+console.log('money: ' + typeof(money) + '\n' + 'income: ' + typeof(income) + '\n' + 'deposit: ' + typeof(deposit) + '\n');
 console.log('addExpensesLength: ', addExpenses.length);
 console.log(`"Период равен ${period} месяцев" и "Цель заработать ${mission} рублей/долларов/гривен/юани"`);
+console.log('addExpenses: ', addExpenses.toLowerCase().split(', '));
 
-addExpenses = addExpenses.toLowerCase();
-console.log('addExpenses: ', addExpenses.split(', '));
+let expenses1 = prompt('Введите обязательную статью расходов?', 'Покупка велосипеда.'),
+    amount1 = parseInt(prompt('Во сколько это обойдется?', '10000руб.')),
+    expenses2 = prompt('Введите обязательную статью расходов?', 'Поход к хирургу после велосипеда.'),
+    amount2 = parseInt(prompt('Во сколько это обойдется?', '20000руб.'));
 
-money = parseInt(prompt('Ваш месячный доход?', '200000руб.'));
-
-addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую', 
-'комуналка, еда, бензин, казино');
-deposit = confirm('Есть ли у вас депозит в банке?');
-let expenses1 = prompt('Введите обязательную статью расходов?', 'Покупка велосипеда.');
-let amount1 = parseInt(prompt('Во сколько это обойдется?', '10000руб.'));
-let expenses2 = prompt('Введите обязательную статью расходов?', 'Поход к хирургу после велосипеда.');
-let amount2 = parseInt(prompt('Во сколько это обойдется?', '20000руб.'));
-
-let budgetMonth = money - amount1 - amount2;
-budgetDay = Math.floor(budgetMonth / 30);
+let budgetMonth = money - amount1 - amount2,
+    budgetDay = Math.floor(budgetMonth / 30);
 
 console.log('Ваш месячный доход: ', money);
 console.log('Бюджет за месяц:', budgetMonth);
