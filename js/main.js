@@ -29,26 +29,36 @@ function getTargetMonth(allMoney, acmon){
 
 let budgetDay = Math.floor(accumulatedMonth / 30);
 
-console.log('money: ' + typeof(money) + '\n', 
-'income: ' + typeof(income) + '\n', 'deposit: ' + typeof(deposit) + '\n');
+let showTypeOf = function(data){
+    console.log(data, typeof(data));
+};
+
+showTypeOf(money);
+showTypeOf(income);
+showTypeOf(deposit);
+
 console.log(`"Период равен ${period} месяцев" и "Цель заработать ${mission} рублей/долларов/гривен/юани"`);
 console.log('Вывод возможных расходов: ', addExpenses.toLowerCase().split(', '));
 console.log('Ваш месячный доход: ', money);
 console.log('Бюджет за месяц:', accumulatedMonth);
 console.log('Цель будет достигнута за:', getTargetMonth(mission, accumulatedMonth), 'месяцев');
 console.log('Бюджет на день:', budgetDay);
- 
-switch(true){
-    case budgetDay >= 1200 :
-        console.log('У вас высокий уровень дохода');
-        break;
-    case budgetDay < 1200 && budgetDay > 600:
-        console.log('У вас средний уровень дохода');
-        break;
-    case budgetDay <= 600 && budgetDay > -1:
-        console.log('К сожалению у вас уровень дохода ниже среднего');
-        break;
-    default:
-        console.log('Что то пошло не так');
-}
+
+let getStatusIncome = function(bd){
+    switch(true){
+        case bd >= 1200 :
+            return 'У вас высокий уровень дохода';
+            break;
+        case bd < 1200 && bd > 600:
+            return 'У вас средний уровень дохода';
+            break;
+        case bd <= 600 && bd > -1:
+            return 'К сожалению у вас уровень дохода ниже среднего';
+            break;
+        default:
+            return 'Что то пошло не так';
+    }
+};
+
+console.log(getStatusIncome(budgetDay));
 
