@@ -8,7 +8,8 @@ let money = parseInt(prompt('Ваш месячный доход?', '200000руб
     mission = 1000000,
     period = 12;
 
-console.log('money: ' + typeof(money) + '\n' + 'income: ' + typeof(income) + '\n' + 'deposit: ' + typeof(deposit) + '\n');
+console.log('money: ' + typeof(money) + '\n', 
+'income: ' + typeof(income) + '\n', 'deposit: ' + typeof(deposit) + '\n');
 console.log('addExpensesLength: ', addExpenses.length);
 console.log(`"Период равен ${period} месяцев" и "Цель заработать ${mission} рублей/долларов/гривен/юани"`);
 console.log('addExpenses: ', addExpenses.toLowerCase().split(', '));
