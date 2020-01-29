@@ -13,19 +13,20 @@ let expenses1 = prompt('Введите обязательную статью р�
     expenses2 = prompt('Введите обязательную статью расходов?', 'Поход к хирургу после велосипеда.'),
     amount2 = parseInt(prompt('Во сколько это обойдется?', '20000руб.'));
 
-function getExpensesMonth(am1, am2){
-    return am1 + am2;
-}
+let getExpensesMonth = function(){
+    return amount1 + amount2;
+};
+console.log('Расходы за месяц: ', getExpensesMonth());
 
-function getAccumulatedMonth(mn, amnt1, amnt2, getExpMon){
-    return mn - getExpMon(amnt1, amnt2);
-}
+let getAccumulatedMonth = function(){
+    return money - getExpensesMonth();
+};
 
-let accumulatedMonth = getAccumulatedMonth(money, amount1, amount2, getExpensesMonth);
+let accumulatedMonth = getAccumulatedMonth();
 
-function getTargetMonth(allMoney, acmon){
-    return Math.ceil(allMoney / acmon);
-}
+let getTargetMonth = function (){
+    return mission / accumulatedMonth;
+};
 
 let budgetDay = Math.floor(accumulatedMonth / 30);
 
@@ -41,20 +42,17 @@ console.log(`"Период равен ${period} месяцев" и "Цель з�
 console.log('Вывод возможных расходов: ', addExpenses.toLowerCase().split(', '));
 console.log('Ваш месячный доход: ', money);
 console.log('Бюджет за месяц:', accumulatedMonth);
-console.log('Цель будет достигнута за:', getTargetMonth(mission, accumulatedMonth), 'месяцев');
+console.log('Цель будет достигнута за:', Math.ceil(getTargetMonth()), 'месяцев');
 console.log('Бюджет на день:', budgetDay);
 
 let getStatusIncome = function(bd){
     switch(true){
         case bd >= 1200 :
             return 'У вас высокий уровень дохода';
-            break;
         case bd < 1200 && bd > 600:
             return 'У вас средний уровень дохода';
-            break;
         case bd <= 600 && bd > -1:
             return 'К сожалению у вас уровень дохода ниже среднего';
-            break;
         default:
             return 'Что то пошло не так';
     }
