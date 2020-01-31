@@ -50,6 +50,8 @@ let getTargetMonth = function (){
     return Math.ceil(mission / accumulatedMonth);
 };
 
+let getTargetMonthOne = getTargetMonth();
+
 let budgetDay = Math.floor(accumulatedMonth / 30);
 
 let showTypeOf = function(data){
@@ -64,8 +66,8 @@ console.log(`"Период равен ${period} месяцев" и "Цель з�
 // console.log('Вывод возможных расходов: ', addExpenses.toLowerCase().split(', '));
 console.log('Ваш месячный доход: ', money);
 console.log('Бюджет за месяц:', accumulatedMonth);
-console.log(getTargetMonth() > 0 ? 'Цель будет достигнута за: ' + 
-getTargetMonth() + ' месяцев' : 'Цель не будет достигнута');
+console.log(getTargetMonthOne > 0 ? 'Цель будет достигнута за: ' + 
+getTargetMonthOne + ' месяцев' : 'Цель не будет достигнута');
 console.log('Бюджет на день:', budgetDay);
 
 let getStatusIncome = function(bd){
