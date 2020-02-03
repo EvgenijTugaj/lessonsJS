@@ -4,14 +4,6 @@ let isNumber = function(n){
     return !isNaN(parseFloat(n)) && isFinite(n);
 };
 
-// let money,
-//     takeMoney = function(){
-//     do{
-//         money = prompt('Ваш месяный доход?', 60000);
-//     }
-//     while(!isNumber(money) && money === '' && money === null);
-// };
-
 let appData = {
     income: {},
     addIncome: [],
@@ -42,10 +34,8 @@ let appData = {
                     acc[i] = +prompt(`Во сколько это обойдется?`);
                 }
                 while(!isNumber(acc[i]) && acc[i] === '' && acc[i] === null);
-                // appData.expensesAmout += acc[i];
                 appData.expenses[appData.addExpenses[i]] = acc[i];
             }
-            // console.log(appData.expenses);
 
     },
     takeMoney: function(){
@@ -58,7 +48,7 @@ let appData = {
         for(let key in appData.expenses){
         appData.expensesMonth += appData.expenses[key];
        } 
-       console.log('appData.expensesMonth: ', appData.expensesMonth);
+       console.log(`Расходы за месяц: ${appData.expensesMonth}`);
     },
     getBudget: function(){
         appData.accumulatedMonth = appData.budget - appData.expensesMonth;
@@ -66,36 +56,28 @@ let appData = {
     },
     getTargetMonth: function (){
         appData.numberMonths = Math.ceil(appData.mission / appData.accumulatedMonth);
+        console.log(`Цель будет достигнута за: ${appData.numberMonths} месяцев`);
     },
     getStatusIncome: function(){
         switch(true){
             case appData.budgetDay >= 1200 :
-                return 'У вас высокий уровень дохода';
+                console.log('У вас высокий уровень дохода');
+                break;
             case appData.budgetDay < 1200 && appData.budgetDay > 600:
-                return 'У вас средний уровень дохода';
+                console.log('У вас средний уровень дохода');
+                break;
             case appData.budgetDay <= 600 && appData.budgetDay > -1:
-                return 'К сожалению у вас уровень дохода ниже среднего';
+                console.log('К сожалению у вас уровень дохода ниже среднего');
+                break;
             default:
-                return 'Что то пошло не так';
+                console.log('Что то пошло не так');
         }
     }
 };
 
+appData.takeMoney();
 appData.asking();
 appData.getExpensesMonth();
-
-// appData.takeMoney();
-
-// console.log(`"Период равен ${appData.period} месяцев" и 
-// "Цель заработать ${appData.mission} рублей/долларов/гривен/юани"`);
-// // console.log('Вывод возможных расходов: ', addExpenses.toLowerCase().split(', '));
-// console.log('Ваш месячный доход: ', money);
-// console.log('Бюджет за месяц:', accumulatedMonth);
-// console.log(getTargetMonthOne > 0 ? 'Цель будет достигнута за: ' + 
-// getTargetMonthOne + ' месяцев' : 'Цель не будет достигнута');
-// console.log('Бюджет на день:', budgetDay);
-
-
-
-// console.log(getStatusIncome(budgetDay));
-
+appData.getBudget();
+appData.getTargetMonth();
+appData.getStatusIncome();
