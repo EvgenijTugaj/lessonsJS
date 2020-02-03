@@ -23,26 +23,26 @@ let appData = {
         // let addExpensesTwo = prompt('Перечислите возможные расходы за рассчитываемый период через запятую', 
         // 'комуналка, еда, бензин, казино');
         //     appData.addExpenses[0] = addExpenses.toLowerCase().split(', ');
-            appData.deposit = confirm('Есть ли у вас депозит в банке?');
-            let acc = [];
-            for(let i = 0; i < 2; i++){
-                do{
-                    appData.addExpenses[i] = prompt('Введите обязательную статью расходов?', 'Покупка велосипеда.');
-                }
-                while(appData.addExpenses[i] === false);
-                do{
-                    acc[i] = +prompt(`Во сколько это обойдется?`);
-                }
-                while(!isNumber(acc[i]) && acc[i] === '' && acc[i] === null);
-                appData.expenses[appData.addExpenses[i]] = acc[i];
+        appData.deposit = confirm('Есть ли у вас депозит в банке?');
+        let acc = [];
+        for(let i = 0; i < 2; i++){
+            do{
+                appData.addExpenses[i] = prompt('Введите обязательную статью расходов?', 'Покупка велосипеда.');
             }
-
+        while(appData.addExpenses[i] === false && appData.addExpenses[i] === '' && appData.addExpenses[i] === null);
+            do{
+                acc[i] = +prompt(`Во сколько это обойдется?`);
+            }
+            while(!isNumber(acc[i]) && acc[i] === '' && acc[i] === null);
+            appData.expenses[appData.addExpenses[i]] = acc[i];
+        }
     },
     takeMoney: function(){
         do{
             appData.money = +prompt('Ваш месяный доход?', 60000);
         }
-        while(!isNumber(appData.budget) && appData.budget === '' && appData.budget === null); //не работает
+        while(!isNumber(appData.money)); //не работает
+        appData.money = +appData.money;
     },
     getExpensesMonth: function(){
         for(let key in appData.expenses){
@@ -81,3 +81,8 @@ appData.getExpensesMonth();
 appData.getBudget();
 appData.getTargetMonth();
 appData.getStatusIncome();
+
+console.log('"Наша программа включает в себя данные: "');
+for(let prop in appData){
+    console.log("appData." + prop + " = " + appData[prop]);
+}
