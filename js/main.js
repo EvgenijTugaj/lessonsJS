@@ -12,7 +12,7 @@ let appData = {
     deposit: false,
     mission: 1000000,
     period: 12,
-    budget: 0, //месяный доход
+    money: 0, //месяный доход
     budgetDay: 0,
     budgetMonth: 0,
     expensesMonth: 0,
@@ -40,7 +40,7 @@ let appData = {
     },
     takeMoney: function(){
         do{
-            appData.budget = +prompt('Ваш месяный доход?', 60000);
+            appData.money = +prompt('Ваш месяный доход?', 60000);
         }
         while(!isNumber(appData.budget) && appData.budget === '' && appData.budget === null); //не работает
     },
@@ -51,7 +51,7 @@ let appData = {
        console.log(`Расходы за месяц: ${appData.expensesMonth}`);
     },
     getBudget: function(){
-        appData.accumulatedMonth = appData.budget - appData.expensesMonth;
+        appData.accumulatedMonth = appData.money - appData.expensesMonth;
         appData.budgetDay = Math.floor(appData.accumulatedMonth / 30);
     },
     getTargetMonth: function (){
