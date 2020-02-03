@@ -5,10 +5,7 @@ let isNumber = function(n){
 };
 
 let appData = {
-    income: {},
-    addIncome: [],
     addExpenses: [], // Перечисление статей расходов, первый раз, второй, третий
-    expensesAmout: 0, //общая сумма обязательных расходов в месяц 2 раза
     deposit: false,
     mission: 1000000,
     period: 12,
@@ -37,12 +34,11 @@ let appData = {
             appData.expenses[appData.addExpenses[i]] = acc[i];
         }
     },
-    takeMoney: function(){
+    start: function(){
         do{
-            appData.money = +prompt('Ваш месяный доход?', 60000);
+            appData.money = prompt('Ваш месячный доход?', 60000);
         }
-        while(!isNumber(appData.money)); //не работает
-        appData.money = +appData.money;
+        while(!isNumber(appData.money)&& appData.money === '' && appData.money === null); //не работает
     },
     getExpensesMonth: function(){
         for(let key in appData.expenses){
@@ -75,7 +71,7 @@ let appData = {
     }
 };
 
-appData.takeMoney();
+appData.start();
 appData.asking();
 appData.getExpensesMonth();
 appData.getBudget();
