@@ -60,6 +60,7 @@ let appData = {
             while(!isNumber(y));
             appData.expenses[x + `${i}`] = +y;
         }
+        appData.deposit = confirm('Есть ли у вас депозит в банке?');
     },
     getExpensesMonth: function(){
         for(let key in appData.expenses){
@@ -110,6 +111,7 @@ let appData = {
 };
 
 appData.asking();
+appData.getInfoDeposit();
 appData.getExpensesMonth();
 appData.getBudget();
 appData.getTargetMonth();
@@ -120,13 +122,7 @@ appData.getStatusIncome();
 //     console.log("appData." + prop + " = " + appData[prop]);
 // }
 
-appData.getInfoDeposit();
+// appData.getInfoDeposit();
 console.log(appData.percentDeposit, appData.moneyDeposit, appData.calcSaveMoney());
 
-
-let x = [1, 2, 3, 4];
-let y = [];
-
-for(let i; i < x.length; i++){
-    y[i] = x[i];
-}
+console.log(appData.addExpenses.join(', '));
