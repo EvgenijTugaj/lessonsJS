@@ -43,10 +43,6 @@ let appData = {
         }
         appData.addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую', 
         'комуналка, еда, бензин, казино').toLowerCase().split(', ');
-        let number = 0;
-        for(let value of appData.addExpenses){
-            appData.addExpenses[number++] = value[0].toUpperCase() + value.substring(1);
-        }
         appData.deposit = confirm('Есть ли у вас депозит в банке?');
         for(let i = 0; i < 2; i++){
             let x, y;
@@ -125,4 +121,12 @@ appData.getStatusIncome();
 // appData.getInfoDeposit();
 console.log(appData.percentDeposit, appData.moneyDeposit, appData.calcSaveMoney());
 
-console.log(appData.addExpenses.join(', '));
+let xExpenses = function(x){
+let number = 0;
+let yExpenses = [];
+    for(let value of x){
+        yExpenses[number++] = value[0].toUpperCase() + value.substring(1);
+    }
+    return yExpenses.join(', ');
+};
+console.log(xExpenses(appData.addExpenses));
