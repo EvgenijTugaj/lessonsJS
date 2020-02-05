@@ -85,9 +85,24 @@
 //     console.log("appData." + prop + " = " + appData[prop]);
 // }
 
-let buttonStart = document.getElementById('start');
-let btnPlusIncomeAdd = document.getElementsByTagName('button')[0]; 
-let btnPlusExpensesAdd = document.getElementsByTagName('button')[1]; 
-let depositCheck = document.querySelector('#deposit-check');
-let additionalIncomeItem = document.querySelectorAll('.additional_income-item');
-console.log('additionalIncomeItem: ', additionalIncomeItem);
+let buttonStart = document.getElementById('start'),
+    btnPlusIncomeAdd = document.getElementsByTagName('button')[0],
+    btnPlusExpensesAdd = document.getElementsByTagName('button')[1],
+    depositCheck = document.querySelector('#deposit-check'),
+    additionalIncomeItem = document.querySelectorAll('.additional_income-item'),
+    //Value
+    budgetDayValue = document.getElementsByClassName('budget_day-value'),
+    expensesMonthValue = document.getElementsByClassName('expenses_month-value'),
+    additionalIncomeValue = document.getElementsByClassName('additional_income-value'),
+    additionalExpensesValue = document.getElementsByClassName('additional_expenses-value'),
+    incomePeriodValue = document.getElementsByClassName('income_period-value'),
+    targetMonthValue = document.getElementsByClassName('target_month-value'),
+    //leftInput
+    salaryAmount = document.querySelector('.salary-amount'),
+    incomeTitle = document.querySelector('.income-title'),
+    incomeAmount = document.querySelector('.income-amount'),
+    expensesTitle = document.querySelector('.expenses-title'),
+    expensesAmount = document.querySelector('.expenses-amount'),
+    additionalExpensesItem = document.querySelector('.additional_expenses-item'),
+    targetAmount = document.querySelector('.target-amount'),
+    periodSelect = document.querySelector('.period-select');
