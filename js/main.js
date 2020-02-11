@@ -1,29 +1,31 @@
 'use strict';
 
-let start = document.getElementById('start'), //ok
-    btnPlus = document.getElementsByTagName('button'), //ok
+let start = document.getElementById('start'),
+    btnPlus = document.getElementsByTagName('button'),
     incomePlus = btnPlus[0], //ok
     expensesPlus = btnPlus[1], //ok
-    additionalIncomeItem = document.querySelectorAll('.additional_income-item'), //ok
-    depositCheck = document.querySelector('#deposit-check'), //ok
+    additionalIncomeItem = document.querySelectorAll('.additional_income-item'),
+    depositCheck = document.querySelector('#deposit-check'),
     //Value
-    budgetDayValue = document.getElementsByClassName('budget_day-value'), //ok
-    budgetMonthValue = document.getElementsByClassName('budget_month-value'),
-    expensesMonthValue = document.getElementsByClassName('expenses_month-value'), //ok
+    budgetDayValue = document.getElementsByClassName('budget_day-value')[0],
+    budgetMonthValue = document.getElementsByClassName('budget_month-value')[0], 
+    expensesMonthValue = document.getElementsByClassName('expenses_month-value')[0],
     accumulatedMonthValue = document.querySelector('.accumulated_month'),
-    additionalIncomeValue = document.getElementsByClassName('additional_income-value'), //ok уточнить [0]
-    additionalExpensesValue = document.getElementsByClassName('additional_expenses-value'), //ok уточнить [0]
-    incomePeriodValue = document.getElementsByClassName('income_period-value'), //ok уточнить [0]
-    targetMonthValue = document.getElementsByClassName('target_month-value'), //ok уточнить [0]
+    additionalIncomeValue = document.getElementsByClassName('additional_income-value')[0],
+    additionalExpensesValue = document.getElementsByClassName('additional_expenses-value')[0],
+    incomePeriodValue = document.getElementsByClassName('income_period-value')[0],
+    targetMonthValue = document.getElementsByClassName('target_month-value')[0],
     //leftInput
-    salaryAmount = document.querySelector('.salary-amount'), //ok
-    incomeTitle = document.querySelector('.income-title'), //ok
-    incomeAmount = document.querySelector('.income-amount'), //ok
-    expensesTitle = document.querySelector('.expenses-title'), //ok
-    expensesItems = document.querySelectorAll('.expenses-items'), //ok
-    additionalExpenses = document.querySelector('.additional_expenses-item'), //ok - additional_expenses-item проверить
-    // targetAmount = document.querySelector('.target-amount'),
-    periodSelect = document.querySelector('.period-select'); //ok
+    salaryAmount = document.querySelector('.salary-amount'),
+    incomeTitle = document.querySelector('.income-title'),
+    expensesTitle = document.querySelector('.expenses-title'),
+    expensesItems = document.querySelectorAll('.expenses-items'),
+    additionalExpenses = document.querySelector('.additional_expenses-item'),
+    targetAmount = document.querySelector('.target-amount'),
+    periodSelect = document.querySelector('.period-select'),
+    additionalExpensesItem = document.querySelector('.additional_expenses-item'),
+    incomeItems = document.querySelectorAll('.income-items');
+    console.log('additionalExpensesValue: ', additionalExpensesValue);
 
 let isNumber = function(n){
     return !isNaN(parseFloat(n) && isFinite(n));
@@ -34,25 +36,40 @@ let appData = {
     deposit: false,
     percentDeposit: 0,
     moneyDeposit: 0,
-    mission: 1000000,
-    period: 12,
     budget: 0, //месяный доход
     budgetDay: 0,
     budgetMonth: 0,
-    expensesMonth: 0,
+    expensesMonth: 0, //обязательные расходы
     numberMonths: 0,
-    income: {},
+    addIncome: [],
     expenses: {},
+    income: {},
+    incomeMonth: 0,
     start: function(){
         if(salaryAmount.value === ''){
             alert('Ошибка! Поле "Ежемесячный доход" должно быть заполнено!');
             return;
         }
-        appData.budget = salaryAmount.value;
-        console.log('salaryAmount.value: ', salaryAmount.value);
-        appData.getExpenses();
-        appData.getExpensesMonth();
-        appData.getBudget();
+        appData.budget = +salaryAmount.value; //ок, получили
+
+        appData.getExpenses(); //получаем Обязательные расходы
+        appData.getExpensesMonth(); //складываем Обязательные расходы
+        appData.getAddExpenses(); //получаем Возможные расходы
+        appData.getIncome(); //получаем Дополнительный доход
+        appData.getIncomeMonth(); //складываем Дополнительный доход
+        appData.getAddIncome(); //получаем Возможный доход
+        appData.getBudget(); 
+        appData.showResult();
+    },
+    showResult: function(){
+        budgetMonthValue.value = appData.budgetMonth;
+        budgetDayValue.value = appData.budgetDay;
+        expensesMonthValue.value = appData.expensesMonth;
+        additionalExpensesValue.value = appData.addExpenses.join(', ');
+        additionalIncomeValue.value = appData.addIncome.join(', ');
+        targetMonthValue.value = Math.ceil(appData.getTargetMonth());
+        incomePeriodValue.value = appData.calcPeriod();
+
     },
     addExpensesBlock: function(){
         let cloneExpensesItem = expensesItems[0].cloneNode(true);
@@ -69,54 +86,79 @@ let appData = {
            if(itemExpenses !== '' || cashExpenses !== ''){
             appData.expenses[itemExpenses] = +cashExpenses;
            }
-            console.log('appData.expenses');
         });
-    },
-    asking: function(){
-        if(confirm('Есть ли у вас дополнительный источник заработка?')){
-            let itemInc, cashInc;
-            do{
-                itemInc = prompt('Какой у вас дополнительный заработок?', 'Фриланс');
-            }
-            while(itemInc === '' || itemInc === null);
-            do{
-                cashInc = prompt('Сколько в месяц вы на этом зарабатываете?', 15000);
-            }
-            while(!isNumber(cashInc));
-            appData.income[itemInc] = +cashInc;
-        }
-        appData.addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую', 
-        'комуналка, еда, бензин, казино').toLowerCase().split(', ');
-        appData.deposit = confirm('Есть ли у вас депозит в банке?');
     },
     getExpensesMonth: function(){
         for(let key in appData.expenses){
         appData.expensesMonth += appData.expenses[key];
        } 
-       console.log(`Расходы за месяц: ${appData.expensesMonth}`);
+    },
+    addIncomeBlock: function(){
+        let cloneIncomeItem = incomeItems[0].cloneNode(true);
+        incomeItems[0].parentNode.insertBefore(cloneIncomeItem, incomePlus);
+        incomeItems = document.querySelectorAll('.income-items');
+        if(incomeItems.length === 3){
+            incomePlus.style.display = 'none';
+        }
+    },
+    getIncome: function(){
+        incomeItems.forEach(function(item){
+            let itemIncome = item.querySelector('.income-title').value;
+            let cashIncome = item.querySelector('.income-amount').value;
+            if(itemIncome !== '' || cashIncome !== ''){
+                appData.income[itemIncome] = +cashIncome;
+               }
+        });
+    },
+    getIncomeMonth: function(){
+        for(let key in appData.income){
+            appData.incomeMonth += +appData.income[key];
+        }
+    },
+    getAddExpenses: function(){
+        let addExpenses = additionalExpensesItem.value.split(', ');
+        addExpenses.forEach(function(item){
+            item = item.trim();
+            if(item !== ''){
+                appData.addExpenses.push(item);
+            }   
+        });
+    },
+    getAddIncome: function(){
+        additionalIncomeItem.forEach(function(item){
+            let itemValue = item.value.trim();
+            if(itemValue !== ''){
+                appData.addIncome.push(itemValue);
+            }
+        });
+    },
+    asking: function(){
+        appData.deposit = confirm('Есть ли у вас депозит в банке?');
     },
     getBudget: function(){
-        appData.budgetMonth = appData.budget - appData.expensesMonth;
+        appData.budgetMonth = appData.budget + appData.incomeMonth - appData.expensesMonth;
         appData.budgetDay = Math.floor(appData.budgetMonth / 30);
     },
     getTargetMonth: function (){
-        appData.numberMonths = Math.ceil(appData.mission / appData.budgetMonth);
-        // console.log(`Цель будет достигнута за: ${appData.numberMonths} месяцев`);
+        return targetAmount.value / appData.budgetMonth;
     },
     getStatusIncome: function(){
-        switch(true){
-            case appData.budgetDay >= 1200 :
-                console.log('У вас высокий уровень дохода');
-                break;
-            case appData.budgetDay < 1200 && appData.budgetDay > 600:
-                console.log('У вас средний уровень дохода');
-                break;
-            case appData.budgetDay <= 600 && appData.budgetDay > -1:
-                console.log('К сожалению у вас уровень дохода ниже среднего');
-                break;
-            default:
-                console.log('Что то пошло не так');
-        }
+        // switch(true){
+        //     case appData.budgetDay >= 1200 :
+        //         console.log('У вас высокий уровень дохода');
+        //         break;
+        //     case appData.budgetDay < 1200 && appData.budgetDay > 600:
+        //         console.log('У вас средний уровень дохода');
+        //         break;
+        //     case appData.budgetDay <= 600 && appData.budgetDay > -1:
+        //         console.log('К сожалению у вас уровень дохода ниже среднего');
+        //         break;
+        //     default:
+        //         console.log('Что то пошло не так');
+        // }
+    },
+    calcPeriod: function(){
+        return appData.budgetMonth * periodSelect.value;
     },
     getInfoDeposit: function(){
         if(appData.deposit){
@@ -139,19 +181,7 @@ let appData = {
 
 start.addEventListener('click', appData.start);
 expensesPlus.addEventListener('click', appData.addExpensesBlock);
-
-
-appData.getInfoDeposit();
-appData.getTargetMonth();
-appData.getStatusIncome();
-
-// console.log('"Наша программа включает в себя данные: "');
-// for(let prop in appData){
-//     console.log("appData." + prop + " = " + appData[prop]);
-// }
-
-// appData.getInfoDeposit();
-// console.log(appData.percentDeposit, appData.moneyDeposit, appData.calcSaveMoney());
+incomePlus.addEventListener('click', appData.addIncomeBlock);
 
 let xExpenses = function(x){
 let number = 0;
