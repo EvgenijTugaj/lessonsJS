@@ -24,8 +24,10 @@ let start = document.getElementById('start'),
     targetAmount = document.querySelector('.target-amount'),
     periodSelect = document.querySelector('.period-select'),
     additionalExpensesItem = document.querySelector('.additional_expenses-item'),
-    incomeItems = document.querySelectorAll('.income-items');
-    console.log('additionalExpensesValue: ', additionalExpensesValue);
+    incomeItems = document.querySelectorAll('.income-items'),
+    periodAmount = document.querySelector('.period-amount');
+    console.log('periodAmount: ', periodAmount);
+    // console.log('periodSelect: ', periodSelect);
 
 let isNumber = function(n){
     return !isNaN(parseFloat(n) && isFinite(n));
@@ -142,6 +144,11 @@ let appData = {
     getTargetMonth: function (){
         return targetAmount.value / appData.budgetMonth;
     },
+    periodSelectChange: function(){
+        periodSelect = document.querySelector('.period-select').value;
+        console.log('periodSelect: ', periodSelect);
+        periodAmount.textContent = periodSelect;
+    },
     getStatusIncome: function(){
         // switch(true){
         //     case appData.budgetDay >= 1200 :
@@ -182,6 +189,7 @@ let appData = {
 start.addEventListener('click', appData.start);
 expensesPlus.addEventListener('click', appData.addExpensesBlock);
 incomePlus.addEventListener('click', appData.addIncomeBlock);
+periodSelect.addEventListener('input', appData.periodSelectChange);
 
 let xExpenses = function(x){
 let number = 0;
