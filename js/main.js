@@ -26,8 +26,6 @@ let start = document.getElementById('start'),
     additionalExpensesItem = document.querySelector('.additional_expenses-item'),
     incomeItems = document.querySelectorAll('.income-items'),
     periodAmount = document.querySelector('.period-amount');
-    console.log('periodAmount: ', periodAmount);
-    // console.log('periodSelect: ', periodSelect);
 
 let isNumber = function(n){
     return !isNaN(parseFloat(n) && isFinite(n));
@@ -71,6 +69,10 @@ let appData = {
         additionalIncomeValue.value = appData.addIncome.join(', ');
         targetMonthValue.value = Math.ceil(appData.getTargetMonth());
         incomePeriodValue.value = appData.calcPeriod();
+        periodSelect.addEventListener('input', function(){
+            periodSelect = document.querySelector('.period-select');
+            incomePeriodValue.value = appData.calcPeriod();
+        });
 
     },
     addExpensesBlock: function(){
@@ -145,9 +147,8 @@ let appData = {
         return targetAmount.value / appData.budgetMonth;
     },
     periodSelectChange: function(){
-        periodSelect = document.querySelector('.period-select').value;
-        console.log('periodSelect: ', periodSelect);
-        periodAmount.textContent = periodSelect;
+        periodSelect = document.querySelector('.period-select');
+        periodAmount.textContent = periodSelect.value;
     },
     getStatusIncome: function(){
         // switch(true){
@@ -185,6 +186,16 @@ let appData = {
         return appData.budgetMonth * appData.period;
     }
 };
+
+start.style.display = 'none';
+salaryAmount.addEventListener('input', function(){
+    console.log('salaryAmount: ', salaryAmount.value.length);
+    if(salaryAmount.value.length >= 2 && !isNaN(salaryAmount.value)){
+        start.style.display = 'block';
+    }else{
+        start.style.display = 'none';
+    }
+});
 
 start.addEventListener('click', appData.start);
 expensesPlus.addEventListener('click', appData.addExpensesBlock);
