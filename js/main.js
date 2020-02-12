@@ -52,6 +52,8 @@ let appData = {
         }
         appData.budget = +salaryAmount.value; //ок, получили
 
+        expensesPlus.removeEventListener('click', appData.addExpensesBlock);
+        incomePlus.removeEventListener('click', appData.addIncomeBlock);
         appData.getExpenses(); //получаем Обязательные расходы
         appData.getExpensesMonth(); //складываем Обязательные расходы
         appData.getAddExpenses(); //получаем Возможные расходы
@@ -60,8 +62,7 @@ let appData = {
         appData.getAddIncome(); //получаем Возможный доход
         appData.getBudget(); 
         appData.showResult();
-        expensesPlus.removeEventListener('click', appData.addExpensesBlock);
-        incomePlus.removeEventListener('click', appData.addIncomeBlock);
+
     },
     showResult: function(){
         budgetMonthValue.value = appData.budgetMonth;
@@ -86,6 +87,7 @@ let appData = {
         expensesItems[0].parentNode.insertBefore(cloneExpensesItem, expensesPlus);
     },
     getExpenses: function(){
+        expensesItems = document.querySelectorAll('.expenses-items');
         expensesItems.forEach(function(item){
            let itemExpenses = item.querySelector('.expenses-title').value;
            let cashExpenses = item.querySelector('.expenses-amount').value;
@@ -108,6 +110,7 @@ let appData = {
         incomeItems[0].parentNode.insertBefore(cloneIncomeItem, incomePlus);
     },
     getIncome: function(){
+        incomeItems = document.querySelectorAll('.income-items');
         incomeItems.forEach(function(item){
             let itemIncome = item.querySelector('.income-title').value;
             let cashIncome = item.querySelector('.income-amount').value;
