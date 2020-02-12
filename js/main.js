@@ -75,13 +75,13 @@ let appData = {
         });
 
     },
-    addExpensesBlock: function(){
-        let cloneExpensesItem = expensesItems[0].cloneNode(true);
-        expensesItems[0].parentNode.insertBefore(cloneExpensesItem, expensesPlus);
+    addExpensesBlock: function(){ 
         expensesItems = document.querySelectorAll('.expenses-items');
         if(expensesItems.length === 3){
-            expensesPlus.style.display = 'none';
+           return;
         }
+        let cloneExpensesItem = expensesItems[0].cloneNode(true);
+        expensesItems[0].parentNode.insertBefore(cloneExpensesItem, expensesPlus);
     },
     getExpenses: function(){
         expensesItems.forEach(function(item){
@@ -98,12 +98,12 @@ let appData = {
        } 
     },
     addIncomeBlock: function(){
-        let cloneIncomeItem = incomeItems[0].cloneNode(true);
-        incomeItems[0].parentNode.insertBefore(cloneIncomeItem, incomePlus);
         incomeItems = document.querySelectorAll('.income-items');
         if(incomeItems.length === 3){
-            incomePlus.style.display = 'none';
+            return;
         }
+        let cloneIncomeItem = incomeItems[0].cloneNode(true);
+        incomeItems[0].parentNode.insertBefore(cloneIncomeItem, incomePlus);
     },
     getIncome: function(){
         incomeItems.forEach(function(item){
@@ -187,17 +187,14 @@ let appData = {
     }
 };
 
-start.style.display = 'none';
+
 salaryAmount.addEventListener('input', function(){
-    console.log('salaryAmount: ', salaryAmount.value.length);
     if(salaryAmount.value.length >= 2 && !isNaN(salaryAmount.value)){
-        start.style.display = 'block';
-    }else{
-        start.style.display = 'none';
+        start.addEventListener('click', appData.start);
     }
 });
 
-start.addEventListener('click', appData.start);
+
 expensesPlus.addEventListener('click', appData.addExpensesBlock);
 incomePlus.addEventListener('click', appData.addIncomeBlock);
 periodSelect.addEventListener('input', appData.periodSelectChange);
