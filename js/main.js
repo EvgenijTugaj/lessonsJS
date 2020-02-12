@@ -60,6 +60,8 @@ let appData = {
         appData.getAddIncome(); //получаем Возможный доход
         appData.getBudget(); 
         appData.showResult();
+        expensesPlus.removeEventListener('click', appData.addExpensesBlock);
+        incomePlus.removeEventListener('click', appData.addIncomeBlock);
     },
     showResult: function(){
         budgetMonthValue.value = appData.budgetMonth;
