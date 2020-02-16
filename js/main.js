@@ -211,7 +211,7 @@ let appData = {
 salaryAmount.addEventListener('input', function(){
     if(salaryAmount.value.length >= 2 && !isNaN(salaryAmount.value)){
         // start.addEventListener('click', appData.start);
-        start.addEventListener('click', this.start.bind(this));
+        start.addEventListener('click', appData.start.bind(appData));
         console.log('start: ', start);
     }
 });
