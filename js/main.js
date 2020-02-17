@@ -49,18 +49,18 @@ let appData = {
             alert('Ошибка! Поле "Ежемесячный доход" должно быть заполнено!');
             return;
         }
-        appData.budget = +salaryAmount.value; //ок, получили
+        this.budget = +salaryAmount.value; //ок, получили
 
         expensesPlus.removeEventListener('click', appData.addExpensesBlock);
         incomePlus.removeEventListener('click', appData.addIncomeBlock);
-        appData.getExpenses(); //получаем Обязательные расходы
-        appData.getExpensesMonth(); //складываем Обязательные расходы
-        appData.getAddExpenses(); //получаем Возможные расходы
-        appData.getIncome(); //получаем Дополнительный доход
-        appData.getIncomeMonth(); //складываем Дополнительный доход
-        appData.getAddIncome(); //получаем Возможный доход
-        appData.getBudget(); 
-        appData.showResult();
+        this.getExpenses(); //получаем Обязательные расходы
+        this.getExpensesMonth(); //складываем Обязательные расходы
+        this.getAddExpenses(); //получаем Возможные расходы
+        this.getIncome(); //получаем Дополнительный доход
+        this.getIncomeMonth(); //складываем Дополнительный доход
+        this.getAddIncome(); //получаем Возможный доход
+        this.getBudget(); 
+        this.showResult();
 
         let readOne = document.querySelectorAll('input[type=text]');
         readOne.forEach(function(item){
