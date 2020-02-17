@@ -207,23 +207,13 @@ let appData = {
     }
 };
 
+start.addEventListener('click', appData.start.bind(appData));
 
-// salaryAmount.addEventListener('input', function(){
-//     if(salaryAmount.value.length >= 2 && !isNaN(salaryAmount.value)){
-//         // start.addEventListener('click', appData.start);
-//         start.addEventListener('click', appData.start.bind(appData));
-//         console.log('start: ', start);
-//     }
-// });
-// start.addEventListener('click', function(){ //Хрень
-//     salaryAmount.addEventListener('input', function(){
-//         if(salaryAmount.value.length >= 2 && !isNaN(salaryAmount.value)){
-//             start.addEventListener('click', appData.start.bind(appData));
-//             console.log('start: ', start);
-//         }
-//     });
-// });
-
+salaryAmount.addEventListener('input', function(){
+    if(isNaN(salaryAmount.value)){
+        salaryAmount.value = salaryAmount.value.slice(0, salaryAmount.value.length - 1);
+    }
+});
 
 expensesPlus.addEventListener('click', appData.addExpensesBlock);
 incomePlus.addEventListener('click', appData.addIncomeBlock);
