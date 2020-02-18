@@ -23,7 +23,8 @@ let start = document.getElementById('start'),
     periodSelect = document.querySelector('.period-select'),
     additionalExpensesItem = document.querySelector('.additional_expenses-item'),
     incomeItems = document.querySelectorAll('.income-items'),
-    periodAmount = document.querySelector('.period-amount');
+    periodAmount = document.querySelector('.period-amount'),
+    reset = document.querySelector('#cancel');
 
 let isNumber = function(n){
     return !isNaN(parseFloat(n) && isFinite(n));
@@ -181,14 +182,15 @@ const appData = new AppData();
 console.log(appData);
 
 salaryAmount.addEventListener('input', function(){
-    if(salaryAmount.value.length >= 2 && !isNaN(salaryAmount.value)){
-        start.addEventListener('click', appData.start.apply(appData));
+    if(isNaN(salaryAmount.value)){
+        salaryAmount.value = salaryAmount.value.slice(0, salaryAmount.value.length - 1);
     }
 });
 
 expensesPlus.addEventListener('click', appData.addExpensesBlock);
 incomePlus.addEventListener('click', appData.addIncomeBlock);
 periodSelect.addEventListener('input', appData.periodSelectChange);
+reset.addEventListener('click', appData.resetAction);
 
 let xExpenses = function(x){
 let number = 0;
