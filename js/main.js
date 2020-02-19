@@ -204,6 +204,49 @@ AppData.prototype.getInfoDeposit = function(){
 AppData.prototype.calcSaveMoney = function(){
     return this.budgetMonth * this.period;
 };
+AppData.prototype.resetAction = function(){
+    periodSelect.value = '0';
+    periodAmount.textContent = periodSelect.value;
+
+    let inputTextData = document.querySelectorAll('.data input[type = text]'),
+        resultInputAll = document.querySelectorAll('.result input[type = text]');
+
+    inputTextData.forEach(function(elem){
+        elem.value = '';
+        elem.removeAttribute('disable');
+    });
+
+    resultInputAll.forEach(function(item){
+        item.value = '';
+    });
+    for(let i = 1; 1 < incomeItems.length; i++){
+        incomeItems[i].parentNode.removeChild(incomeItems[i]);
+        incomePlus.style.display = 'block';
+    }
+    for(let i = 1; 1 < expensesItems.length; i++){
+        expensesItems[i].parentNode.removeChild(expensesItems[i]);
+        expensesPlus.style.display = 'block';
+    }
+    this.addExpenses = []; 
+    this.deposit = false;
+    this.percentDeposit = 0;
+    this.moneyDeposit = 0;
+    this.budget = 0;
+    this.budgetDay = 0;
+    this.budgetMonth = 0;
+    this.expensesMonth = 0; 
+    this.numberMonths = 0;
+    this.addIncome = [];
+    this.expenses = {};
+    this.income = {};
+    this.incomeMonth = 0;
+    reset.style.display = 'none';
+    start.style.display = 'block';
+    start.setAttribute('disabled', 'false');
+
+};
+
+
 
 const appData = new AppData();
 
