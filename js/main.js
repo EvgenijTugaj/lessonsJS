@@ -231,11 +231,11 @@ class AppData {
                 salaryAmount.value = salaryAmount.value.slice(0, salaryAmount.value.length - 1);
             }
         });
-        start.addEventListener('click', this.start);
+        start.addEventListener('click',() => this.start());
         expensesPlus.addEventListener('click', this.addExpensesBlock);
         incomePlus.addEventListener('click', this.addIncomeBlock);
         periodSelect.addEventListener('input', this.periodSelectChange);
-        reset.addEventListener('click', this.resetAction);
+        reset.addEventListener('click', () => this.resetAction());
     }
 }
 
