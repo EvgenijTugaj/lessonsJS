@@ -26,7 +26,7 @@ let start = document.getElementById('start'),
     periodAmount = document.querySelector('.period-amount'),
     reset = document.querySelector('#cancel');
 
-let isNumber = function (n) {
+let isNumber = n => {
     return !isNaN(parseFloat(n) && isFinite(n));
 };
 
@@ -202,14 +202,14 @@ class AppData {
         resultInputAll.forEach((item) => {
             item.value = '';
         });
-        for (let i = 1; 1 < incomeItems.length; i++) {
-            incomeItems[i].parentNode.removeChild(incomeItems[i]);
-            incomePlus.style.display = 'block';
+        for (let i = 1; 1 < incomeItems.length; i++) {     
+            incomeItems[i].parentNode.removeChild(incomeItems[i]);  
         }
         for (let i = 1; 1 < expensesItems.length; i++) {
-            expensesItems[i].parentNode.removeChild(expensesItems[i]);
-            expensesPlus.style.display = 'block';
+            expensesItems[i].parentNode.removeChild(expensesItems[i]);   
         }
+        incomePlus.style.display = 'block';
+        expensesPlus.style.display = 'block';
         this.addExpenses = [];
         this.deposit = false;
         this.percentDeposit = 0;
