@@ -202,17 +202,12 @@ class AppData {
         resultInputAll.forEach((item) => {
             item.value = '';
         });
-        console.log('incomeItems: ', incomeItems);
-        console.log('incomeItems: ', incomeItems[1].parentNode);
-        for (let i = 1; 1 < incomeItems.length; i++) {     
-            // incomeItems[i].parentNode.removeChild(incomeItems[i]);  
-            console.log('incomeItems[i].parentNode2134234234: ', incomeItems[i].parentNode);
+        for (let i = 1; i < incomeItems.length; i++) {     
+            incomeItems[i].parentNode.removeChild(incomeItems[i]);  
         }
-        // console.log('expensesItems: ', expensesItems);
-        // console.log('expensesItems: ', expensesItems[1].parentNode);
-        // for (let i = 1; 1 < expensesItems.length; i++) {
-        //     expensesItems[i].parentNode.removeChild(expensesItems[i]);   
-        // }
+        for (let i = 1; i < expensesItems.length; i++) {
+            expensesItems[i].parentNode.removeChild(expensesItems[i]);   
+        }
         incomePlus.style.display = 'block';
         expensesPlus.style.display = 'block';
         this.addExpenses = [];
