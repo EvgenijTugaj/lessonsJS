@@ -55,8 +55,8 @@ class AppData {
         allInput.forEach((item) => {
             item.setAttribute('disabled', 'true');
         });
-        expensesPlus.removeEventListener('click', this.addExpensesBlock);
-        incomePlus.removeEventListener('click', this.addIncomeBlock);
+        incomePlus.style.display = 'none';
+        expensesPlus.style.display = 'none';
         start.style.display = 'none';
         reset.style.display = 'block';
 
@@ -202,12 +202,17 @@ class AppData {
         resultInputAll.forEach((item) => {
             item.value = '';
         });
+        console.log('incomeItems: ', incomeItems);
+        console.log('incomeItems: ', incomeItems[1].parentNode);
         for (let i = 1; 1 < incomeItems.length; i++) {     
-            incomeItems[i].parentNode.removeChild(incomeItems[i]);  
+            // incomeItems[i].parentNode.removeChild(incomeItems[i]);  
+            console.log('incomeItems[i].parentNode2134234234: ', incomeItems[i].parentNode);
         }
-        for (let i = 1; 1 < expensesItems.length; i++) {
-            expensesItems[i].parentNode.removeChild(expensesItems[i]);   
-        }
+        // console.log('expensesItems: ', expensesItems);
+        // console.log('expensesItems: ', expensesItems[1].parentNode);
+        // for (let i = 1; 1 < expensesItems.length; i++) {
+        //     expensesItems[i].parentNode.removeChild(expensesItems[i]);   
+        // }
         incomePlus.style.display = 'block';
         expensesPlus.style.display = 'block';
         this.addExpenses = [];
