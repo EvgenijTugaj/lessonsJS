@@ -24,7 +24,7 @@ let start = document.getElementById('start'),
     additionalExpensesItem = document.querySelector('.additional_expenses-item'),
     incomeItems = document.querySelectorAll('.income-items'),
     periodAmount = document.querySelector('.period-amount'),
-    reset = document.querySelector('#cancel');
+    reset = document.querySelector('#cancel'); 
 
 let isNumber = n => {
     return !isNaN(parseFloat(n) && isFinite(n));
